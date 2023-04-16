@@ -36,8 +36,8 @@ index_wi = w_span > wi;
 
 %pas 3
 %construire L 
-a = 10.5;
-b = 1;
+a = 10.5;   %obligatoriu mai mare ca 10 pt a satisface cerinta la joasa frecventa
+b = 1;      % b si c se aleg pentru a satisface cerintele la medie frecventa (prin trial and error)
 c = 0.1;
 %set alternativ de valori: a = 15; b = 2; c = 0.2;
 L = a/((b*s+1)*(c*s+1));
