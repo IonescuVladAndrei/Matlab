@@ -62,9 +62,9 @@ title('Verificare L stabil');
 
 %pas 5
 %Calcul C si se verifica C propriu (aka grad numitor <= grad numarator)
-C = P/L;
-S = 1/(1+L);
-T = L/(1+L);
+C = L/P;
+S = feedback(1,series(P,C));
+T = feedback(series(P,C),1);
 %C este propriu
 
 %pas 6
