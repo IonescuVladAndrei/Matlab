@@ -18,9 +18,7 @@ title('Extragere wj si wi');
 %functie de intersctia cu linia 0 db
 wj = 3;
 wi = 11.6;
-%de asemenea se observa ca se respecta buna definire, |Wt| << 1 la frecv
-%joase si |Ws| << 1 la frecv inalte
-
+%de asemenea se observa ca se respecta buna definire min{|Ws|,|Wt|} < 1, |Wt| << 1 la frecv joase si |Ws| << 1 la frecv inalte
 
 %dimensiunea graficului
 w_span = logspace(-3,3,1e3);
@@ -28,7 +26,7 @@ w_span = logspace(-3,3,1e3);
 %nu 
 [mag_Ws,~]=bode(Ws, w_span);
 [mag_Wt,~]=bode(Wt, w_span);
-mag_Ws = reshape(mag_Ws, 1, 1e3);   %reshape pastreaza din tabloul de 3 doar un vector de 1
+mag_Ws = reshape(mag_Ws, 1, 1e3);   
 mag_Wt = reshape(mag_Wt, 1, 1e3);
 rjf = mag2db(mag_Ws./(1-mag_Wt));
 rif = mag2db((1-mag_Ws)./mag_Wt);
@@ -41,6 +39,7 @@ index_wi = w_span > wi;
 a = 10.5;
 b = 1;
 c = 0.1;
+%set alternativ de valori: a = 15; b = 2; c = 0.2;
 L = a/((b*s+1)*(c*s+1));
 
 figure('Name', 'Restrictii', 'NumberTitle','off');
@@ -52,6 +51,7 @@ bodemag(L)
 grid on
 legend('RJF', 'RIF', 'L');
 title('Restrictii la joasa si inalta frecventa')
+%din grafic se observa ca panta functiei L nu depaseste -40 dB/decada
 
 %pas 4
 %se verifica ca L este stabil (hod trece la dreapta lui -1)
@@ -61,11 +61,10 @@ legend('L');
 title('Verificare L stabil');
 
 %pas 5
-%Calcul C
+%Calcul C si se verifica C propriu (aka grad numitor <= grad numarator)
 C = P/L;
 S = 1/(1+L);
 T = L/(1+L);
-%se verifica C propriu (aka grad numitor <= grad numarator)
 %C este propriu
 
 %pas 6
@@ -84,4 +83,4 @@ semilogx(w_span, mag_WsS_WtT);
 grid on
 legend('1 dB', '|Ws*S|+|Wt*T|');
 title('Conditie performanta robusta')
-%se observa ca se afla sub 1 db
+%se observa din grafic ca |Ws*S|+|Wt*T| se afla sub valoarea de 1 db
