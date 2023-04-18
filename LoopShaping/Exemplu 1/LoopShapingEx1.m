@@ -77,10 +77,10 @@ mag_WsS_WtT = mag2db(mag_WsS+mag_WtT);
 
 w_span = logspace(-3,2,1e3);
 figure('Name', 'Conditie performanta robusta', 'NumberTitle','off');
-line([0.01,10^2],[1,1],'Color', 'magenta');
+line([0.01,10^2],[0,0],'Color', 'magenta');
 hold on
 semilogx(w_span, mag_WsS_WtT);
 grid on
-legend('1 dB', '|Ws*S|+|Wt*T|');
+legend('prag', '|Ws*S|+|Wt*T|');
 title('Conditie performanta robusta')
-%se observa din grafic ca |Ws*S|+|Wt*T| se afla sub valoarea de 1 db
+%se observa din grafic ca |Ws*S|+|Wt*T| se afla sub valoarea de 0 db (prag)
